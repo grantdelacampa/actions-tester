@@ -8,14 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     # Map a step output to a job output
     outputs:
-      js_ts: ${{ steps.changes.outputs.js }}
+      js: ${{ steps.changes.outputs.js }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Get Changed Files
         id: changes
         run: |
-          echo "::set-output name=ts::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | grep --include=*.ts --include=*.js "pattern" | xargs)"
+          echo "::set-output name=js::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | grep .js$ | xargs)"
   lint:
       runs-on: ubuntu-latest
       # require the first job to have ran
@@ -25,17 +25,3 @@ jobs:
       steps:
         - name: echo changed files
           run: echo ${{needs.changedFiles.outputs.ts}}
-        
-  # hello_world_job:
-  #   runs-on: ubuntu-latest
-  #   name: A job to say hello
-  #   steps:
-  #     - name: Hello world action step
-  #       id: hello
-  #       uses: grantdelacampa/eslint-disable-detector-action@18362aad1b36a9aab8d5c93a3f82420d01ad655f
-  #       with:
-  #         who-to-greet: 'Mona the Octocat'
-  #     # Use the output from the `hello` step
-  #     - name: Get the output time
-  #       run: echo "The time was ${{ steps.hello.outputs.time }}"
-
