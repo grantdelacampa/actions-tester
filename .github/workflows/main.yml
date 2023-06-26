@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Hello world action step
         id: hello
-        uses: grantdelacampa/eslint-disable-detector-action
+        uses: grantdelacampa/eslint-disable-detector-action@18362aad1b36a9aab8d5c93a3f82420d01ad655f
         with:
           who-to-greet: 'Mona the Octocat'
       # Use the output from the `hello` step
