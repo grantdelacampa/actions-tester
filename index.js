@@ -1,0 +1,1 @@
+const testVar = "my test var";
