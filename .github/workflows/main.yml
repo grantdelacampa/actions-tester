@@ -21,7 +21,7 @@ jobs:
       # require the first job to have ran
       needs: changedFiles
       # only run there are changed files
-      if: ${{needs.changedFiles.outputs.ts}}
+      if: ${{needs.changedFiles.outputs.js}}
       steps:
         - name: echo changed files
-          run: echo ${{needs.changedFiles.outputs.ts}}
+          run: echo ${{needs.changedFiles.outputs.js}}
