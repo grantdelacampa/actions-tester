@@ -1,3 +1,3 @@
 /* eslint-disable */
-const diabledTest = "tst";
-const diabledTest1 = "tst";
+const diabledTest = "tsft";
+const diabledTest1 = "tsct";
