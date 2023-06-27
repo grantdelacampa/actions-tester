@@ -16,7 +16,7 @@ jobs:
       - name: Get Changed Files
         id: changes
         run: |
-          echo "::set-output name=js::$(git diff --name-only --diff-filter=ACMRT ${{ github.base_ref }}..${{ github.head_ref }} | xargs grep -l "/* eslint-disable */")"
+          echo "::set-output name=js::$(git diff --name-only --diff-filter=ACMRT ${{ github.base_ref }} ${{ github.head_ref }} | xargs grep -l "/* eslint-disable */")"
   comment:
       runs-on: ubuntu-latest
       # require the first job to have ran
