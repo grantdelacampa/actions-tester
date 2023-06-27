@@ -16,7 +16,7 @@ jobs:
       - name: Get Changed Files
         id: changes
         run: |
-          echo "::set-output name=js::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | grep -l "/* eslint-disable */" | xargs)"
+          echo "::set-output name=js::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | grep -i -R -l --include="*.js" --include="*.ts" "/\\* eslint-disable \\*/")"
   comment:
       runs-on: ubuntu-latest
       # require the first job to have ran
