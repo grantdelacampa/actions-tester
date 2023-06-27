@@ -1,2 +1,2 @@
 /* eslint-disable */
-const diabledTest = "tst";
+const diabledest = "tst";
