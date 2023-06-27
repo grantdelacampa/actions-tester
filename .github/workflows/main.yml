@@ -2,7 +2,6 @@ on:
   pull_request:
     types: [opened]
 
-# https://dev.to/scienta/get-changed-files-in-github-actions-1p36
 jobs:
   changedFiles: 
     runs-on: ubuntu-latest
@@ -18,7 +17,7 @@ jobs:
         id: changes
         run: |
           echo "::set-output name=js::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | grep -i -R --include="*.js" --include="*.ts" "/\\* eslint-disable \\*/" | xargs)"
-  lint:
+  comment:
       runs-on: ubuntu-latest
       # require the first job to have ran
       needs: changedFiles
@@ -27,3 +26,16 @@ jobs:
       steps:
         - name: echo changed files
           run: echo ${{needs.changedFiles.outputs.js}}
+        - name: Create comment
+          uses: actions/github-script@v6
+          with:
+            script: |
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: 'eslit-disable has been found in the following files: ${{needs.changedFiles.outputs.js}}})
+        - name: block pull request
+          run: |
+            exit 1
+  
