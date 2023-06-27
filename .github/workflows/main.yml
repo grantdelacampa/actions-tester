@@ -34,7 +34,7 @@ jobs:
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: 'eslit-disable has been found in the following files: ${{needs.changedFiles.outputs.js}}})
+                body: 'eslit-disable has been found in the following files: ${{needs.changedFiles.outputs.js}}'})
         - name: block pull request
           run: |
             exit 1
